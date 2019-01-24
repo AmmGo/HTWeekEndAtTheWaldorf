@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_movie"
+        android:icon="@drawable/selector_tab_movie"
+        android:title="@string/tab_movie"/>
+    <item
+        android:id="@+id/tab_music"
+        android:icon="@drawable/selector_tab_music"
+        android:title="@string/tab_music"/>
+    <item
+        android:id="@+id/tab_book"
+        android:icon="@drawable/selector_tab_book"
+        android:title="@string/tab_book"/>
+    <item
+        android:id="@+id/tab_project"
+        android:icon="@drawable/selector_tab_project"
+        android:title="@string/tab_project"/>
+
+</menu>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="150dp"
+    android:layout_height="210dp"
+    android:layout_margin="@dimen/dp_4"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="1dp"
+    app:cardUseCompatPadding="true">
+
+    <cn.piesat.weekendatthewaldorf.uis.view.PosterItemView
+        android:id="@+id/banner"
+        android:layout_width="150dp"
+        android:layout_height="210dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/movtitle"
+        android:layout_width="150dp"
+        android:layout_height="24dp"
+        android:layout_gravity="bottom"
+        android:background="#af202020"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="电影名称"
+        android:textColor="#fff"
+        android:textSize="12sp" />
+</android.support.v7.widget.CardView>
