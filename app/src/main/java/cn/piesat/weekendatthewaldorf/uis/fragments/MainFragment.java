@@ -2,7 +2,6 @@ package cn.piesat.weekendatthewaldorf.uis.fragments;
 
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -11,13 +10,15 @@ import android.util.SparseIntArray;
 import android.view.MenuItem;
 import android.view.View;
 
-import net.arvin.baselib.base.BaseFragment;
 import net.arvin.baselib.widgets.TitleBar;
 
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
 import cn.piesat.weekendatthewaldorf.R;
+import cn.piesat.weekendatthewaldorf.base.BaseFragment;
+import cn.piesat.weekendatthewaldorf.uis.view.LoadDataView;
 
 /**
  * @author yjl WeekendAtTheWaldorf
@@ -30,11 +31,11 @@ import cn.piesat.weekendatthewaldorf.R;
  * @class describe
  */
 public class MainFragment extends BaseFragment implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+    @BindView(R.id.title_bar)
+    TitleBar titleBar;
+    @BindView(R.id.tab_navigation)
+    BottomNavigationView bottomNavigationView;
     private IDrawerToggle drawerToggle;
-
-    private TitleBar titleBar;
-    private BottomNavigationView bottomNavigationView;
-
     private List<Integer> tabIds = Arrays.asList(R.id.tab_movie, R.id.tab_music, R.id.tab_book, R.id.tab_project);
     private SparseArray<BaseFragment> fragments = new SparseArray<>();
     private SparseArray<Class<? extends BaseFragment>> fragmentClasses = new SparseArray<>();
@@ -53,6 +54,34 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
+    protected int layoutId() {
+        return R.layout.fragment_main;
+    }
+
+    @Override
+    protected void initView() {
+        titleBar.getLeftImageView().setOnClickListener(this);
+        titleBar.getRightImageView().setOnClickListener(this);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(tabIds.get(0));
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initPresenter() {
+
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof IDrawerToggle) {
@@ -64,22 +93,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
     public void onDetach() {
         super.onDetach();
         drawerToggle = null;
-    }
-
-    @Override
-    protected int getContentView() {
-        return R.layout.fragment_main;
-    }
-
-    @Override
-    protected void init(Bundle savedInstanceState) {
-        titleBar = root.findViewById(R.id.title_bar);
-        titleBar.getLeftImageView().setOnClickListener(this);
-        titleBar.getRightImageView().setOnClickListener(this);
-
-        bottomNavigationView = root.findViewById(R.id.tab_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(tabIds.get(0));
     }
 
     @Override
@@ -128,6 +141,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener, 
             }
         }
     }
+
 
     public interface IDrawerToggle {
         void toggle();

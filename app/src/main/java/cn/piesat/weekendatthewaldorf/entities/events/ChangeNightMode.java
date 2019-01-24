@@ -1,9 +1,14 @@
 package cn.piesat.weekendatthewaldorf.entities.events;
 
 /**
- * Created by arvinljw on 2018/12/4 18:15
- * Function：
- * Desc：
+ * @author yjl WeekendAtTheWaldorf
+ * @name ChangeNightMode
+ * @class name：cn.piesat.weekendatthewaldorf.entities.events
+ * @class describe
+ * @time 2019/1/24 19:43
+ * @change
+ * @chang time
+ * @class describe
  */
 public class ChangeNightMode {
 }

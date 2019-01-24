@@ -14,4 +14,9 @@
     <color name="ripple">#66000000</color>
     <color name="navigation_type">#e6e6e6</color>
     <color name="navigation_type_selected">#ffffff</color>
+    <color name="colorRateRed">#FB5B81</color>
+    <!--透明色-->
+    <color name="colorTransparent">#00000000</color>
+    <!--正文文字颜色-->
+    <color name="colorContent">#757575</color>
 </resources>

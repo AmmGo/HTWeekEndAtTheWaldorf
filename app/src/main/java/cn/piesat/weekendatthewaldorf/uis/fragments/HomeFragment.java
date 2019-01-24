@@ -1,10 +1,11 @@
 package cn.piesat.weekendatthewaldorf.uis.fragments;
 
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -13,18 +14,22 @@ import com.leochuan.AutoPlayRecyclerView;
 import com.leochuan.CarouselLayoutManager;
 import com.leochuan.ViewPagerLayoutManager;
 
-import net.arvin.baselib.base.BaseFragment;
 import net.arvin.baselib.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import cn.piesat.weekendatthewaldorf.R;
+import cn.piesat.weekendatthewaldorf.base.BaseFragment;
 import cn.piesat.weekendatthewaldorf.entities.movie.FilmsEntity;
 import cn.piesat.weekendatthewaldorf.nets.Api;
 import cn.piesat.weekendatthewaldorf.nets.retrofit.RetrofitClient;
+import cn.piesat.weekendatthewaldorf.uis.activites.MovieTopActivity;
 import cn.piesat.weekendatthewaldorf.uis.adapters.BannerAdapter;
 import cn.piesat.weekendatthewaldorf.uis.adapters.HomeTabFragmentPagerAdapter;
+import cn.piesat.weekendatthewaldorf.uis.view.LoadDataView;
 import cn.piesat.weekendatthewaldorf.utils.Util;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -47,29 +52,53 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 public class HomeFragment extends BaseFragment {
     private List<FilmsEntity.SubjectsBean> films;
     private Api api;
-    private AutoPlayRecyclerView banner;
     private CarouselLayoutManager carouselLayoutManager;
     private BannerAdapter bannerAdapter;
-    private ImageView imgBannerBg;
     private int bgNum;
-    private com.antiless.support.widget.TabLayout homeTabView;
-    private ViewPager homepager;
+    @BindView(R.id.recycler)
+    AutoPlayRecyclerView banner;
+    @BindView(R.id.img_bg)
+    ImageView imgBannerBg;
+    @BindView(R.id.home_tabs)
+    com.antiless.support.widget.TabLayout homeTabView;
+    @BindView(R.id.homepager)
+    ViewPager homepager;
+
+    @OnClick({R.id.tv_top})
+    public void onClickView(View v) {
+        switch (v.getId()) {
+            case R.id.tv_top:
+                startActivity(new Intent(getContext(), MovieTopActivity.class));
+                break;
+            default:
+        }
+    }
 
     @Override
-    protected int getContentView() {
+    protected int layoutId() {
         return R.layout.fragment_home;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void initView() {
         initService();
-        banner = root.findViewById(R.id.recycler);
-        imgBannerBg = root.findViewById(R.id.img_bg);
-        homeTabView = root.findViewById(R.id.home_tabs);
-        homepager = root.findViewById(R.id.homepager);
         initTabs();
         ConfigBannerView();
         filmData();
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initPresenter() {
 
     }
 
@@ -93,7 +122,7 @@ public class HomeFragment extends BaseFragment {
                 .subscribe(new Observer<FilmsEntity>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        ToastUtil.showToast(getContext(), "dieng");
+                        ToastUtil.showToast(getContext(), "onSubscribe");
                     }
 
                     @Override
@@ -101,17 +130,16 @@ public class HomeFragment extends BaseFragment {
                         films = new ArrayList<>();
                         films.addAll(movie.subjects);
                         bannerAdapter.setNewData(films);
-                        ToastUtil.showToast(getContext(), "dieng");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        ToastUtil.showToast(getContext(), "dieng");
+                        ToastUtil.showToast(getContext(), "onError");
                     }
 
                     @Override
                     public void onComplete() {
-                        ToastUtil.showToast(getContext(), "dieng");
+                        ToastUtil.showToast(getContext(), "onComplete");
                     }
                 });
     }
@@ -148,4 +176,6 @@ public class HomeFragment extends BaseFragment {
             }
         });
     }
+
+
 }

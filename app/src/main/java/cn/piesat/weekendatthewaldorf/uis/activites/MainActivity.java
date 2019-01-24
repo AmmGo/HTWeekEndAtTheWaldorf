@@ -1,14 +1,12 @@
 package cn.piesat.weekendatthewaldorf.uis.activites;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.ViewGroup;
 
-import net.arvin.baselib.base.BaseActivity;
 import net.arvin.baselib.utils.ToastUtil;
 import net.arvin.baselib.utils.WeakHandler;
 
@@ -16,10 +14,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.ButterKnife;
 import cn.piesat.weekendatthewaldorf.R;
+import cn.piesat.weekendatthewaldorf.base.BaseActivity;
 import cn.piesat.weekendatthewaldorf.entities.events.ChangeNightMode;
 import cn.piesat.weekendatthewaldorf.uis.fragments.MainFragment;
+import cn.piesat.weekendatthewaldorf.uis.view.LoadDataView;
 
 /**
  * @author yjl WeekendAtTheWaldorf
@@ -41,8 +40,39 @@ public class MainActivity extends BaseActivity implements MainFragment.IDrawerTo
     private boolean canQuit = false;
 
     @Override
-    protected int getContentView() {
+    protected int layoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected ViewGroup loadDataViewLayout() {
+        return null;
+    }
+
+    @Override
+    protected void initView() {
+        EventBus.getDefault().register(this);
+        handler = new WeakHandler((WeakHandler.IHandle) this);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        mainFragment = new MainFragment();
+        fragmentTransaction.add(R.id.layout_main, mainFragment);
+        fragmentTransaction.commit();
+        layoutDrawer = findViewById(R.id.layout_drawer);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void getLoadView(LoadDataView loadView) {
+
+    }
+
+    @Override
+    protected void initPresenter() {
+
     }
 
     @Override
@@ -51,17 +81,6 @@ public class MainActivity extends BaseActivity implements MainFragment.IDrawerTo
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void init(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
-        ButterKnife.bind(this);
-        handler = new WeakHandler((WeakHandler.IHandle) this);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        mainFragment = new MainFragment();
-        fragmentTransaction.add(R.id.layout_main, mainFragment);
-        fragmentTransaction.commit();
-        layoutDrawer = findViewById(R.id.layout_drawer);
-    }
     @Override
     public void toggle() {
         @SuppressLint("RtlHardcoded")
@@ -94,6 +113,7 @@ public class MainActivity extends BaseActivity implements MainFragment.IDrawerTo
         }
         super.onBackPressed();
     }
+
     @Override
     public void handleMessage(Message msg) {
         if (msg.what == 0) {

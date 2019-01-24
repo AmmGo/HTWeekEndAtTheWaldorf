@@ -5,9 +5,14 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * 新片榜
- * <p>
- * Created by Tnno Wu on 2018/01/30.
+ * @author yjl WeekendAtTheWaldorf
+ * @name MovieNewMoviesEntity
+ * @class name：cn.piesat.weekendatthewaldorf.entities.movie
+ * @class describe
+ * @time 2019/1/24 19:43
+ * @change
+ * @chang time
+ * @class describe
  */
 
 public class MovieNewMoviesEntity {

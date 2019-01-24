@@ -1,15 +1,9 @@
 package cn.piesat.weekendatthewaldorf.uis.fragments;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import net.arvin.baselib.base.BaseFragment;
-
 import cn.piesat.weekendatthewaldorf.R;
+import cn.piesat.weekendatthewaldorf.base.BaseFragment;
+import cn.piesat.weekendatthewaldorf.uis.view.LoadDataView;
 
 /**
  * @author yjl WeekendAtTheWaldorf
@@ -24,13 +18,27 @@ import cn.piesat.weekendatthewaldorf.R;
 public class BooksFragment extends BaseFragment {
 
     @Override
-    protected int getContentView() {
+    protected int layoutId() {
         return R.layout.fragment_books;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void initView() {
 
     }
 
+    @Override
+    protected void getLoadView(LoadDataView mLoadView) {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initPresenter() {
+
+    }
 }

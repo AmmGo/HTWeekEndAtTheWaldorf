@@ -32,4 +32,6 @@ dependencies {
     implementation 'rouchuan.viewpagerlayoutmanager:viewpagerlayoutmanager:2.0.22'
     implementation 'com.github.hiliving:tablayout-android:1.0.1'
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

@@ -3,9 +3,11 @@ package cn.piesat.weekendatthewaldorf.nets;
 
 import cn.piesat.weekendatthewaldorf.entities.movie.FilmsEntity;
 import cn.piesat.weekendatthewaldorf.entities.movie.MovieNewMoviesEntity;
+import cn.piesat.weekendatthewaldorf.entities.movie.MovieSubjectInfoEntity;
 import cn.piesat.weekendatthewaldorf.entities.movie.MovieWeeklyEntity;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -59,4 +61,18 @@ public interface Api {
      */
     @GET("weekly")
     Observable<MovieWeeklyEntity> getMovieWeekly(@Query("apikey") String apikey);
+    /**
+     * 电影条目信息
+     *
+     * apikey：固定值 0b2bdeda43b5688921839c8ecb20399b
+     * city：所在城市，例如北京、上海等
+     * client：客户端信息。可为空
+     * udid：用户 id。可为空
+     *
+     * 简：http://api.douban.com/v2/movie/subject/26004132?apikey=0b2bdeda43b5688921839c8ecb20399b
+     * 全：http://api.douban.com/v2/movie/subject/26004132?apikey=0b2bdeda43b5688921839c8ecb20399b&city=%E5%8C%97%E4%BA%AC&client=&udid=
+     */
+    @GET("subject/{movieId}")
+    Observable<MovieSubjectInfoEntity> getMovieSubjectInfo(@Path("movieId") String movieId,
+                                                           @Query("apikey") String apikey);
 }
